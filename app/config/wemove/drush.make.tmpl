@@ -1,0 +1,294 @@
+; A drush makefile for CiviCRM.
+; Call using:
+; drush make --working-copy civicrm.make
+
+; drush make API version
+api = 2
+
+; Drupal core
+core = %%CMS_VERSION%%
+
+; ****************************************
+; Drupal core
+; ****************************************
+
+projects[] = drupal
+
+; ****************************************
+; CiviCRM core
+; ****************************************
+
+; IMPORTANT: replace "github.com/civicrm" by your own fork of CiviCRM.
+; This will make it easier to submit pull-requests for patches.
+; see: http://wiki.civicrm.org/confluence/display/CRMDOC/Github+for+CiviCRM
+
+libraries[civicrmdrupal][destination] = modules
+libraries[civicrmdrupal][directory_name] = civicrm/drupal
+libraries[civicrmdrupal][download][type] = git
+libraries[civicrmdrupal][download][url] = %%CACHE_DIR%%/civicrm/civicrm-drupal.git
+libraries[civicrmdrupal][download][branch] = 7.x-%%CIVI_VERSION%%
+libraries[civicrmdrupal][overwrite] = TRUE
+
+libraries[civicrmpackages][destination] = modules
+libraries[civicrmpackages][directory_name] = civicrm/packages
+libraries[civicrmpackages][download][type] = git
+libraries[civicrmpackages][download][url] = %%CACHE_DIR%%/civicrm/civicrm-packages.git
+libraries[civicrmpackages][download][branch] = %%CIVI_VERSION%%
+libraries[civicrmpackages][overwrite] = TRUE
+
+; Download available l10n releases (may be outdated)
+; libraries[civicrm_l10n][destination] = modules
+; libraries[civicrm_l10n][directory_name] = civicrm/l10n/fr_CA/LC_MESSAGES/
+; libraries[civicrm_l10n][download][type] = get
+; libraries[civicrm_l10n][download][url] = "https://raw.github.com/civicrm/l10n/master/po/fr_CA/civicrm.mo"
+; libraries[civicrm_l10n][overwrite] = TRUE
+
+; Overwrite .mo files with latest versions
+libraries[civicrm_l10n_latest][destination] = modules
+libraries[civicrm_l10n_latest][directory_name] = civicrm/l10n
+libraries[civicrm_l10n_latest][download][type] = get
+libraries[civicrm_l10n_latest][download][url] = http://download.civicrm.org/civicrm-l10n-core/archives/civicrm-l10n-daily.tar.gz
+libraries[civicrm_l10n_latest][overwrite] = TRUE
+
+libraries[civicrm][destination] = modules
+libraries[civicrm][directory_name] = civicrm
+libraries[civicrm][download][type] = git
+libraries[civicrm][download][url] = %%CACHE_DIR%%/civicrm/civicrm-core.git
+libraries[civicrm][download][branch] = %%CIVI_VERSION%%
+libraries[civicrm][overwrite] = TRUE
+
+; ****************************************
+; Runtime Modules
+; ****************************************
+
+projects[civicrm_error][subdir] = contrib
+projects[civicrm_error][version] = 2.0-rc3
+
+projects[views_bootstrap][subdir] = contrib
+projects[views_bootstrap][version] = "3.1"
+
+projects[views_bulk_operations][version] = "3.4"
+projects[admin_menu][version] = "3.0-rc5"
+projects[ctools][version] = "1.12"
+projects[ckeditor][version] = "1.17"
+projects[ckeditor_image][version] = "1.2"
+projects[node_clone][version] = "1.0"
+projects[diff][version] = "3.3"
+projects[disable_breadcrumbs][version] = "1.3"
+projects[entity][version] = "1.8"
+projects[entity_translation][version] = "1.0-beta6"
+projects[exclude_node_title][version] = "1.9"
+projects[file_entity][version] = "2.1"
+projects[form_builder][version] = "1.20"
+projects[google_analytics][version] = "2.3"
+projects[i18n][version] = "1.17"
+projects[insert][version] = "1.3"
+projects[jquery_update][version] = "2.7"
+projects[l10n_update][version] = "2.1"
+projects[libraries][version] = "2.3"
+projects[link][version] = "1.4"
+projects[logintoboggan][version] = "1.5"
+projects[mailjet][version] = "2.14"
+projects[mailsystem][version] = "2.34"
+projects[markdown][version] = "1.5"
+projects[media][version] = "2.6"
+projects[metatag][version] = "1.21"
+projects[node_convert][version] = "1.2"
+projects[options_element][version] = "1.12"
+projects[pathauto][version] = "1.3"
+projects[piwik][version] = "2.9"
+projects[plupload][version] = "1.7"
+projects[redirect][version] = "1.0-rc3"
+projects[role_theme_switcher][version] = "1.1"
+projects[rules][version] = "2.10"
+projects[securelogin][version] = "1.6"
+projects[select_or_other][version] = "2.22"
+projects[shariff][version] = "1.2"
+projects[title][version] = "1.0-alpha9"
+projects[tmgmt][version] = "1.0-rc2"
+projects[tmgmt_google][version] = "1.0-alpha2"
+projects[tmgmt_microsoft][version] = "1.0-alpha2"
+projects[token][version] = "1.7"
+projects[transliteration][version] = "3.2"
+projects[variable][version] = "2.5"
+projects[views][version] = "3.16"
+projects[views_date_format_sql][version] = "3.3"
+projects[views_php][version] = "1.0-alpha3"
+projects[webform][version] = "4.15"
+projects[webform2pdf][version] = "4.0"
+projects[webform_ajax][version] = "1.1"
+projects[webform_civicrm][version] = "4.18"
+projects[webform_localization][version] = "4.10"
+projects[webform_term_opts][version] = "4.0"
+
+; ****************************************
+; CiviCRM extensions
+; ****************************************
+
+libraries[ams][destination] = modules
+libraries[ams][directory_name] = civicrm/tools/extensions/ams
+libraries[ams][download][type] = git
+libraries[ams][download][url] = %%CACHE_DIR%%/WeMoveEU/ams.git
+libraries[ams][download][branch] = master
+libraries[ams][overwrite] = TRUE
+
+libraries[bic][destination] = modules
+libraries[bic][directory_name] = civicrm/tools/extensions/bic
+libraries[bic][download][type] = git
+libraries[bic][download][url] = %%CACHE_DIR%%/WeMoveEU/bic.git
+libraries[bic][download][branch] = master
+libraries[bic][overwrite] = TRUE
+
+libraries[civisualize][destination] = modules
+libraries[civisualize][directory_name] = civicrm/tools/extensions/civisualize
+libraries[civisualize][download][type] = git
+libraries[civisualize][download][url] = %%CACHE_DIR%%/TechToThePeople/civisualize.git
+libraries[civisualize][download][branch] = master
+libraries[civisualize][overwrite] = TRUE
+
+libraries[contribjs][destination] = modules
+libraries[contribjs][directory_name] = civicrm/tools/extensions/contribjs
+libraries[contribjs][download][type] = git
+libraries[contribjs][download][url] = %%CACHE_DIR%%/WeMoveEU/contribjs.git
+libraries[contribjs][download][branch] = master
+libraries[contribjs][overwrite] = TRUE
+
+libraries[contributm][destination] = modules
+libraries[contributm][directory_name] = civicrm/tools/extensions/contributm
+libraries[contributm][download][type] = git
+libraries[contributm][download][url] = %%CACHE_DIR%%/WeMoveEU/contributm.git
+libraries[contributm][download][branch] = master
+libraries[contributm][overwrite] = TRUE
+
+libraries[contributm][destination] = modules
+libraries[contributm][directory_name] = civicrm/tools/extensions/commitcivi
+libraries[contributm][download][type] = git
+libraries[contributm][download][url] = %%CACHE_DIR%%/WeMoveEU/commitcivi.git
+libraries[contributm][download][branch] = master
+libraries[contributm][overwrite] = TRUE
+
+libraries[group2summary][destination] = modules
+libraries[group2summary][directory_name] = civicrm/tools/extensions/group2summary
+libraries[group2summary][download][type] = git
+libraries[group2summary][download][url] = %%CACHE_DIR%%/TechToThePeople/group2summary.git
+libraries[group2summary][download][branch] = master
+libraries[group2summary][overwrite] = TRUE
+
+libraries[groupand][destination] = modules
+libraries[groupand][directory_name] = civicrm/tools/extensions/groupand
+libraries[groupand][download][type] = git
+libraries[groupand][download][url] = %%CACHE_DIR%%/WeMoveEU/groupand.git
+libraries[groupand][download][branch] = master
+libraries[groupand][overwrite] = TRUE
+
+libraries[lonesome][destination] = modules
+libraries[lonesome][directory_name] = civicrm/tools/extensions/lonesome
+libraries[lonesome][download][type] = git
+libraries[lonesome][download][url] = %%CACHE_DIR%%/TechToThePeople/lonesome.git
+libraries[lonesome][download][branch] = master
+libraries[lonesome][overwrite] = TRUE
+
+libraries[mailjet][destination] = modules
+libraries[mailjet][directory_name] = civicrm/tools/extensions/mailjet
+libraries[mailjet][download][type] = git
+libraries[mailjet][download][url] = %%CACHE_DIR%%/WeMoveEU/mailjet.git
+libraries[mailjet][download][branch] = master
+libraries[mailjet][overwrite] = TRUE
+
+libraries[nobillingfields][destination] = modules
+libraries[nobillingfields][directory_name] = civicrm/tools/extensions/nobillingfields
+libraries[nobillingfields][download][type] = git
+libraries[nobillingfields][download][url] = %%CACHE_DIR%%/WeMoveEU/nobillingfields.git
+libraries[nobillingfields][download][branch] = master
+libraries[nobillingfields][overwrite] = TRUE
+
+libraries[noverwrite][destination] = modules
+libraries[noverwrite][directory_name] = civicrm/tools/extensions/noverwrite
+libraries[noverwrite][download][type] = git
+libraries[noverwrite][download][url] = %%CACHE_DIR%%/TechToThePeople/noverwrite.git
+libraries[noverwrite][download][branch] = master
+libraries[noverwrite][overwrite] = TRUE
+
+libraries[normalise][destination] = modules
+libraries[normalise][directory_name] = civicrm/tools/extensions/normalise
+libraries[normalise][download][type] = git
+libraries[normalise][download][url] = %%CACHE_DIR%%/TechToThePeople/normalise.git
+libraries[normalise][download][branch] = master
+libraries[normalise][overwrite] = TRUE
+
+libraries[osm][destination] = modules
+libraries[osm][directory_name] = civicrm/tools/extensions/osm
+libraries[osm][download][type] = git
+libraries[osm][download][url] = %%CACHE_DIR%%/systopia/osm.git
+libraries[osm][download][branch] = master
+libraries[osm][overwrite] = TRUE
+
+libraries[randomsample][destination] = modules
+libraries[randomsample][directory_name] = civicrm/tools/extensions/randomsample
+libraries[randomsample][download][type] = git
+libraries[randomsample][download][url] = %%CACHE_DIR%%/caltha/randomsample.git
+libraries[randomsample][download][branch] = master
+libraries[randomsample][overwrite] = TRUE
+
+libraries[sendeventconf][destination] = modules
+libraries[sendeventconf][directory_name] = civicrm/tools/extensions/sendeventconf
+libraries[sendeventconf][download][type] = git
+libraries[sendeventconf][download][url] = %%CACHE_DIR%%/TechToThePeople/sendeventconf.git
+libraries[sendeventconf][download][branch] = master
+libraries[sendeventconf][overwrite] = TRUE
+
+libraries[sepa][destination] = modules
+libraries[sepa][directory_name] = civicrm/tools/extensions/sepa
+libraries[sepa][download][type] = git
+libraries[sepa][download][url] = %%CACHE_DIR%%/Project60/sepa.git
+libraries[sepa][download][branch] = 1.2.x
+libraries[sepa][overwrite] = TRUE
+
+libraries[speakcivi][destination] = modules
+libraries[speakcivi][directory_name] = civicrm/tools/extensions/speakcivi
+libraries[speakcivi][download][type] = git
+libraries[speakcivi][download][url] = %%CACHE_DIR%%/WeMoveEU/speakcivi.git
+libraries[speakcivi][download][branch] = master
+libraries[speakcivi][overwrite] = TRUE
+
+libraries[stripe][destination] = modules
+libraries[stripe][directory_name] = civicrm/tools/extensions/stripe
+libraries[stripe][download][type] = git
+libraries[stripe][download][url] = %%CACHE_DIR%%/WeMoveEU/stripe.git
+libraries[stripe][download][branch] = 4.7-dev.patched
+libraries[stripe][overwrite] = TRUE
+
+libraries[sqlreport][destination] = modules
+libraries[sqlreport][directory_name] = civicrm/tools/extensions/sqlreport
+libraries[sqlreport][download][type] = git
+libraries[sqlreport][download][url] = https://github.com/WeMoveEU/sqlreport
+libraries[sqlreport][download][branch] = master
+libraries[sqlreport][overwrite] = TRUE
+
+libraries[targeting][destination] = modules
+libraries[targeting][directory_name] = civicrm/tools/extensions/targeting
+libraries[targeting][download][type] = git
+libraries[targeting][download][url] = %%CACHE_DIR%%/WeMoveEU/mailing-targeting.git
+libraries[targeting][download][branch] = master
+libraries[targeting][overwrite] = TRUE
+
+libraries[utmaltor][destination] = modules
+libraries[utmaltor][directory_name] = civicrm/tools/extensions/utmaltor
+libraries[utmaltor][download][type] = git
+libraries[utmaltor][download][url] = %%CACHE_DIR%%/WeMoveEU/utmaltor.git
+libraries[utmaltor][download][branch] = master
+libraries[utmaltor][overwrite] = TRUE
+
+; ****************************************
+; Developer modules
+; ****************************************
+
+projects[devel][subdir] = contrib
+projects[devel][version] = 1.5
+
+libraries[civicrmdeveloper][destination] = modules
+libraries[civicrmdeveloper][directory_name] = contrib/civicrm_developer
+libraries[civicrmdeveloper][download][type] = git
+libraries[civicrmdeveloper][download][url] = %%CACHE_DIR%%/eileenmcnaughton/civicrm_developer.git
+libraries[civicrmdeveloper][download][branch] = master
+libraries[civicrmdeveloper][overwrite] = TRUE
