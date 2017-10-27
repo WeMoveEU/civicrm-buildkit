@@ -1,5 +1,6 @@
 org.project60.bic
 eu.tttp.civisualize
+eu.wemove.commitcivi
 eu.wemove.contribjs
 eu.wemove.contributm
 eu.tttp.group2summary
