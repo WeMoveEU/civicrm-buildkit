@@ -1,5 +1,6 @@
 <?php
 
+// Campaign types
 civicrm_api3('OptionValue', 'create', [
   'sequential' => 1,
   'option_group_id' => "campaign_type",
@@ -7,6 +8,8 @@ civicrm_api3('OptionValue', 'create', [
   'title' => 'Fundraising',
   'weight' => 1
 ]);
+
+//Members group
 $params = [
   'sequential' => 1,
   'name' => 'members',
@@ -18,6 +21,8 @@ if (!$result['count']) {
   $result = civicrm_api3('Group', 'create', $params);
 }
 $groupId = $result['id'];
+
+// Language groups
 $languageGroups = [
   'da-language-members' => 'Danish language Members',
   'de-language-members' => 'German language Members',
@@ -39,6 +44,14 @@ foreach ($languageGroups as $name => $title) {
   ]);
 }
 
+//Other language group
+$result = civicrm_api3('Group', 'create', [
+  'sequential' => 1,
+  'name' => 'other-language-activists',
+  'title' => 'Other speaking Activists',
+]);
+$defaultLangGroupId = $result['id'];
+
 // todo custom fields for campaign
 // todo Join & Leave
 // todo anonymous contact
@@ -48,6 +61,7 @@ foreach ($languageGroups as $name => $title) {
 Civi::settings()->set('opt_in', 1);
 Civi::settings()->set('group_id', $groupId);
 Civi::settings()->set('default_language', 'en_GB');
+Civi::settings()->set('default_language_group_id', $defaultLangGroupId);
 Civi::settings()->set('country_lang_mapping', array(
   'DE' => 'de_DE',
   'DK' => 'da_DK',
